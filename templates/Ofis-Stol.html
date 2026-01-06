@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Ofis Stoly Detallary | Bezeg Ussady{% endblock %}
+
+{% block title %}Ofis Stoly | {{ t['hero_title'] }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-6 py-20">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <img src="/static/images/Ofis_Stol1_esasy.jpg" class="w-full rounded shadow-xl border border-amber-500/20">
+        <div>
+            <h1 class="text-5xl font-bold mb-4 text-amber-500 brand-font">Ofis Stoly (Modern)</h1>
+            <p class="text-4xl text-amber-600 font-bold mb-8">1500 <span class="text-2xl">{{ t['price_currency']
+                    }}</span></p>
+            <p class="text-lg text-amber-600/80 mb-8 font-medium">Ofis üçin ýokary hilli, döwrebap dizaýnly stol.
+                Material: MDF we demir karkas.</p>
+
+            <a href="https://wa.me/99365184868?text=Ofis Stoly (Modern) - {{ t['whatsapp_order'] }}"
+                class="inline-block bg-green-600 text-white py-4 px-8 rounded font-bold hover:bg-green-700 transition-colors uppercase tracking-widest shadow-lg">
+                <i class="fab fa-whatsapp mr-2"></i> {{ t['whatsapp_order'] }}
+            </a>
+            <a href="/static/images/Ofis_Stol1_4.jpg" class="glightbox"><img src="/static/images/Ofis_Stol1_4.jpg"
+                    class="h-20 w-full object-cover rounded shadow-sm border border-transparent hover:border-amber-500 transition"></a>
+        </div>
+    </div>
+    <div class="flex flex-col justify-center">
+        <div class="mb-4 text-amber-600 font-bold tracking-widest text-xs uppercase">Bezeg Ussady Modern</div>
+        <h1 class="brand-font text-4xl font-bold mb-4 uppercase text-gray-800">Ofis Stoly</h1>
+        <p class="text-4xl text-amber-600 font-black mb-8 border-b border-amber-100 pb-6">1.500 <span
+                class="text-lg">TMT</span></p>
+        <div class="space-y-6 text-gray-700 text-lg">
+            <div class="flex justify-between border-b border-gray-100 pb-3"><strong>Ölçegi:</strong> <span
+                    class="text-gray-500">180 x 80 x 75 sm</span></div>
+            <div class="flex justify-between border-b border-gray-100 pb-3"><strong>Agramy:</strong> <span
+                    class="text-gray-500">35 kg</span></div>
+            <div class="flex justify-between border-b border-gray-100 pb-3"><strong>Materialy:</strong> <span
+                    class="text-gray-500">Laminat & Demir</span></div>
+        </div>
+
+        <div class="flex flex-col gap-4 mt-10">
+            <button
+                onclick='addToCart({"id": "ofis-stol", "name": "Ofis Stoly", "price": 1500, "image": "/static/images/Ofis_Stol1_esasy.jpg"})'
+                class="bg-amber-600 text-white text-center py-5 font-bold rounded shadow-xl hover:bg-amber-700 hover:-translate-y-1 transition-all uppercase tracking-widest cursor-pointer">
+                SEPETE GOŞ
+            </button>
+            <a href="https://wa.me/99365184868"
+                class="bg-green-600 text-white text-center py-5 font-bold rounded shadow-xl hover:bg-green-700 hover:-translate-y-1 transition-all uppercase tracking-widest">
+                WHATSAPP-DAN SARGYT ET
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

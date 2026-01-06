@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<style>
+    .bg-pattern {
+        /* Pattern updated to be subtle on both themes via opacity */
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%23b48632' fill-opacity='0.05'%3E%3Cpath fill-rule='evenodd' d='M11 0l5 20H6l5-20zm42 0l5 20H48l5-20zm-24 50l5 20h-10l5-20zm24 0l5 20H48l5-20zM11 50l5 20H6l5-20zm24-50l5 20h-10l5-20zm0 50l5 20h-10l5-20zm24-25l5 20H48l5-20zm-48 0l5 20H6l5-20zm24 0l5 20h-10l5-20z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .hero-bg {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-bg h-[70vh] flex items-center justify-center text-center text-amber-500 px-4">
+    <div class="animate-fade-in-up">
+        <h2
+            class="brand-font text-4xl md:text-7xl mb-6 uppercase text-amber-500 hover:text-amber-400 transition-colors cursor-default drop-shadow-lg">
+            {{ t['hero_title'] }}
+        </h2>
+        <div class="h-1 w-32 bg-amber-600 mx-auto mb-6 shadow-lg transition-all duration-500 hover:w-64"></div>
+        <p class="text-sm md:text-2xl font-bold italic tracking-widest uppercase mb-12 text-amber-100">
+            {{ t['hero_subtitle'] }}
+        </p>
+
+        <div class="mt-8">
+            <a href="#galeriya"
+                class="inline-block bg-amber-600 text-white px-10 py-4 font-bold rounded-sm hover:bg-amber-700 hover:scale-105 transition-all uppercase tracking-widest text-xs md:text-sm shadow-lg hover:shadow-amber-500/50">
+                {{ t['hero_btn'] }}
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Section -->
+<section id="galeriya" class="py-12 bg-pattern text-center">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+            <h3
+                class="brand-font text-3xl uppercase italic underline decoration-amber-500 underline-offset-8 text-amber-500">
+                {{ t['catalog_title'] }}
+            </h3>
+            <p class="mt-4 text-amber-600/80 font-bold uppercase tracking-widest text-xs">
+                {{ t['catalog_subtitle'] }}
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Gallery Items -->
+            {% set categories = [
+            {'img': 'ashana1.jpg', 'gallery': 'ashana'},
+            {'img': 'yatylyan1_1.jpg', 'gallery': 'yatylyan'},
+            {'img': 'myhman1.jpg', 'gallery': 'myhman'},
+            {'img': 'chaga1.jpg', 'gallery': 'chaga'},
+            {'img': 'ofis_mebel1_1.jpg', 'gallery': 'ofis'},
+            {'img': 'gapy1.jpg', 'gallery': 'gapy'}
+            ] %}
+
+            {# Hardcode names temporarily for layout, updated dynamically by key #}
+            {% set cat_keys = ['ashana', 'yatylyan', 'myhman', 'chaga', 'ofis', 'gapy'] %}
+
+            {% for cat in categories %}
+            <div class="group rounded-sm shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-amber-500/20"
+                style="background-color: var(--bg-secondary);">
+                <div class="h-64 overflow-hidden relative">
+                    <img src="/static/images/{{ cat.img }}" alt="{{ cat.gallery }}"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity duration-300">
+                    </div>
+                </div>
+                <div class="p-6 border-t border-amber-500/20">
+                    {# Dynamic Category Name Logic would go here, simplified for now to rely on backend routed pages #}
+                    <h4 class="brand-font text-lg font-bold uppercase mb-4 text-amber-500">
+                        {# Mapping keys to names visually #}
+                        {% if cat.gallery == 'ashana' %}{{ t['catalog'] if lang == 'ru' else 'Aşhana' }}{% endif %}
+                        {% if cat.gallery == 'yatylyan' %}{{ t['catalog'] if lang == 'ru' else 'Ýatylýan' }}{% endif %}
+                        {% if cat.gallery == 'myhman' %}{{ t['catalog'] if lang == 'ru' else 'Myhman' }}{% endif %}
+                        {% if cat.gallery == 'chaga' %}{{ t['catalog'] if lang == 'ru' else 'Çaga' }}{% endif %}
+                        {% if cat.gallery == 'ofis' %}{{ t['catalog'] if lang == 'ru' else 'Ofis' }}{% endif %}
+                        {% if cat.gallery == 'gapy' %}{{ t['catalog'] if lang == 'ru' else 'Gapy' }}{% endif %}
+                    </h4>
+                    <a href="/kategori/{{ cat.gallery }}?lang={{ lang }}"
+                        class="inline-block bg-transparent text-amber-600 px-6 py-2 text-[10px] font-bold tracking-[2px] btn-hover border border-amber-600 hover:bg-amber-600 hover:text-white transition-colors uppercase">
+                        {{ t['view_details'] }}
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Services / Design Section -->
+<section id="taslama" class="py-24 text-white border-y border-amber-600/20" style="background-color: #1a1a1a;">
+    <div class="container mx-auto px-6 text-center">
+        <h3 class="brand-font text-3xl md:text-4xl mb-2 text-amber-500 uppercase italic">
+            {{ t['design_title'] }}
+        </h3>
+        <p class="mt-2 text-amber-600 font-bold uppercase tracking-widest text-sm mb-12">
+            {{ t['design_subtitle'] }}
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-8 text-left">
+            <!-- Design Service -->
+            <div
+                class="bg-zinc-800/50 p-8 rounded-sm border border-zinc-700 hover:border-amber-500/50 transition duration-500">
+                <h4 class="text-white font-bold uppercase tracking-widest mb-6 border-l-4 border-amber-500 pl-4">
+                    {{ t['design_service'] }}
+                </h4>
+
+                <!-- Bullet Points -->
+                <ul class="space-y-3 mb-6">
+                    <li class="flex items-center text-gray-300">
+                        <i class="fas fa-check-circle text-amber-500 mr-3"></i> {{ t['design_list_1'] }}
+                    </li>
+                    <li class="flex items-center text-gray-300">
+                        <i class="fas fa-check-circle text-amber-500 mr-3"></i> {{ t['design_list_2'] }}
+                    </li>
+                    <li class="flex items-center text-gray-300">
+                        <i class="fas fa-check-circle text-amber-500 mr-3"></i> {{ t['design_list_3'] }}
+                    </li>
+                </ul>
+
+                <div class="grid grid-cols-2 gap-3 mt-4">
+                    {% for i in range(1, 3) %}
+                    <a href="/static/images/3d_cizgy1_{{ i }}.jpg"
+                        class="glightbox relative group overflow-hidden block rounded-sm shadow-lg border border-zinc-600 hover:border-amber-500 transition">
+                        <img src="/static/images/3d_cizgy1_{{ i }}.jpg"
+                            class="w-full h-32 object-cover group-hover:scale-110 transition duration-500">
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Real Work -->
+            <div
+                class="bg-zinc-800/50 p-8 rounded-sm border border-zinc-700 hover:border-amber-500/50 transition duration-500">
+                <h4 class="text-amber-500 font-bold uppercase tracking-widest mb-6 border-l-4 border-amber-500 pl-4">
+                    {{ t['real_work'] }}
+                </h4>
+
+                <p
+                    class="text-gray-400 text-sm mb-6 uppercase tracking-widest font-bold border-b border-amber-500/30 pb-2 inline-block">
+                    BITIRILEN IŞLER
+                </p>
+
+                <div class="grid grid-cols-2 gap-3 mt-4">
+                    {% for i in range(1, 4) %}
+                    <a href="/static/images/tayyar_onum1_{{ i }}.jpg"
+                        class="glightbox relative group overflow-hidden block rounded-sm shadow-lg border border-zinc-600 hover:border-amber-500 transition">
+                        <img src="/static/images/tayyar_onum1_{{ i }}.jpg"
+                            class="w-full h-32 object-cover group-hover:scale-110 transition duration-500">
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<!-- Search Script Removed -->
+{% endblock %}
